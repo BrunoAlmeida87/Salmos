@@ -1,0 +1,21 @@
+{
+  "name": "Salmo do Dia",
+  "short_name": "Salmo do Dia",
+  "description": "Um salmo por dia, acompanhando o calendário litúrgico e as campanhas da Igreja Católica no Brasil.",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f1e7",
+  "theme_color": "#6b4a8e",
+  "icons": [
+    { "src": "icons/icone-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icone-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icone-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icone.svg", "sizes": "any", "type": "image/svg+xml" }
+  ],
+  "shortcuts": [
+    { "name": "Todos os salmos", "url": "salmos.html" },
+    { "name": "Calendário anual", "url": "calendario.html" }
+  ]
+}

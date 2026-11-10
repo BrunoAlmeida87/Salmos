@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f1e7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#16140f" media="(prefers-color-scheme: dark)">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icone.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icone-180.png">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Calendário Anual</title>
+  <meta name="description" content="Calendário anual com o salmo de cada dia, as cores litúrgicas e as principais celebrações.">
+</head>
+<body data-pagina="calendario">
+  <header class="topo">
+    <a class="marca" href="./"><span class="cruz" aria-hidden="true">✝</span><span class="txt"> Salmo do Dia</span></a>
+    <nav class="menu" aria-label="Páginas">
+      <a href="./" data-pagina="hoje">Hoje</a>
+      <a href="salmos.html" data-pagina="salmos">Salmos</a>
+      <a href="calendario.html" data-pagina="calendario">Calendário</a>
+    </nav>
+    <button id="btnTema" class="icone pequeno" type="button" aria-label="Alternar tema claro/escuro" title="Alternar tema">◐</button>
+  </header>
+
+  <main>
+    <div class="ano-cab">
+      <button id="anoAnt" class="icone nao-imprimir" type="button" aria-label="Ano anterior">‹</button>
+      <h1 id="anoTitulo"></h1>
+      <button id="anoProx" class="icone nao-imprimir" type="button" aria-label="Próximo ano">›</button>
+    </div>
+    <p class="nao-imprimir" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <button id="imprimir" type="button" class="botao">Imprimir / salvar em PDF</button>
+      <label class="campo" style="margin:0"><input id="comFestas" type="checkbox" checked> Mostrar lista de celebrações</label>
+    </p>
+    <p class="legenda">
+      <span><i class="ponto c-verde"></i>Tempo Comum</span>
+      <span><i class="ponto c-roxo"></i>Advento / Quaresma</span>
+      <span><i class="ponto c-branco"></i>Natal / Páscoa / festas</span>
+      <span><i class="ponto c-vermelho"></i>Mártires / Espírito</span>
+      <span><i class="ponto c-rosa"></i>Alegria</span>
+      <span>“Sl 23” = salmo do dia</span>
+    </p>
+    <div id="anoGrade" class="ano-grade" style="margin-top:12px"></div>
+  </main>
+
+  <footer class="rodape">
+    <p>Salmo do Dia — calendário litúrgico da Igreja Católica no Brasil. Os salmos são sugestões para a oração pessoal.</p>
+  </footer>
+
+  <script src="js/salmos.js"></script>
+  <script src="js/paroquia.js"></script>
+  <script src="js/liturgia.js"></script>
+  <script src="js/comum.js"></script>
+  <script src="js/calendario.js"></script>
+</body>
+</html>

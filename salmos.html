@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f1e7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#16140f" media="(prefers-color-scheme: dark)">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icone.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icone-180.png">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Todos os Salmos</title>
+  <meta name="description" content="Os 150 salmos, com busca por palavra.">
+</head>
+<body data-pagina="salmos">
+  <header class="topo">
+    <a class="marca" href="./"><span class="cruz" aria-hidden="true">✝</span><span class="txt"> Salmo do Dia</span></a>
+    <nav class="menu" aria-label="Páginas">
+      <a href="./" data-pagina="hoje">Hoje</a>
+      <a href="salmos.html" data-pagina="salmos">Salmos</a>
+      <a href="calendario.html" data-pagina="calendario">Calendário</a>
+    </nav>
+    <button id="btnTema" class="icone pequeno" type="button" aria-label="Alternar tema claro/escuro" title="Alternar tema">◐</button>
+  </header>
+
+  <main>
+    <section id="indice">
+      <h1 class="titulo" style="margin-top:10px">Os 150 Salmos</h1>
+      <form class="busca" role="search" onsubmit="return false">
+        <input id="busca" type="search" placeholder="Buscar: pastor, refúgio, perdão… ou um número" aria-label="Buscar nos salmos" autocomplete="off">
+      </form>
+      <p id="contagem" class="contagem"></p>
+      <div id="resultados" class="resultados"></div>
+      <nav id="lista" class="lista-salmos" aria-label="Lista de salmos"></nav>
+    </section>
+
+    <article id="leitor" class="cartao" hidden>
+      <div class="faixa" aria-hidden="true" style="background:var(--acento)"></div>
+      <p><a class="link" href="#" id="voltar">← Todos os salmos</a></p>
+      <h1 id="leitorTitulo" class="num-salmo" style="color:var(--acento)"></h1>
+      <p id="leitorSub" class="porque"></p>
+      <div class="ferramentas" role="toolbar" aria-label="Leitura">
+        <button id="menorLetra" type="button" class="chip" aria-label="Diminuir letra">A−</button>
+        <button id="maiorLetra" type="button" class="chip" aria-label="Aumentar letra">A+</button>
+        <button id="ouvir" type="button" class="chip" aria-pressed="false">🔊 Ouvir</button>
+        <button id="coros" type="button" class="chip" aria-pressed="false" title="Versículos alternados para rezar em grupo">Dois coros</button>
+      </div>
+      <div id="versos" class="versos"></div>
+      <p id="verInteiro" hidden><a class="link" href="#"></a></p>
+      <div class="leitor-nav">
+        <a id="anterior" class="botao secundario" href="#">‹ Anterior</a>
+        <button id="compartilhar" type="button" class="botao">Compartilhar</button>
+        <a id="seguinte" class="botao secundario" href="#">Próximo ›</a>
+      </div>
+      <p id="aviso" class="aviso" role="status"></p>
+    </article>
+  </main>
+
+  <footer class="rodape">
+    <p>Texto: <span id="traducao"></span>. Numeração hebraica dos salmos, a mesma das Bíblias católicas atuais.</p>
+  </footer>
+
+  <script src="js/salmos.js"></script>
+  <script src="js/comum.js"></script>
+  <script src="js/salmos-pagina.js"></script>
+</body>
+</html>

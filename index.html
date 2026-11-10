@@ -2,18 +2,30 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Salmo do Dia</title>
   <meta name="description" content="Um salmo por dia, acompanhando o calendário litúrgico e as campanhas da Igreja Católica no Brasil.">
   <meta name="theme-color" content="#f6f1e7" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#16140f" media="(prefers-color-scheme: dark)">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%236b4a8e'/%3E%3Cpath d='M14 5h4v7h7v4h-7v11h-4V16H7v-4h7z' fill='%23f6e7b4'/%3E%3C/svg%3E">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icone.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icone-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Salmo do Dia">
+  <meta property="og:title" content="Salmo do Dia">
+  <meta property="og:description" content="Um salmo por dia, no ritmo do ano litúrgico.">
+  <meta property="og:image" content="icons/icone-512.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-pagina="hoje">
   <header class="topo">
-    <div class="marca"><span class="cruz" aria-hidden="true">✝</span> Salmo do Dia</div>
-    <button id="btnTema" class="icone" type="button" aria-label="Alternar tema claro/escuro" title="Alternar tema">◐</button>
+    <a class="marca" href="./"><span class="cruz" aria-hidden="true">✝</span><span class="txt"> Salmo do Dia</span></a>
+    <nav class="menu" aria-label="Páginas">
+      <a href="./" data-pagina="hoje">Hoje</a>
+      <a href="salmos.html" data-pagina="salmos">Salmos</a>
+      <a href="calendario.html" data-pagina="calendario">Calendário</a>
+    </nav>
+    <button id="btnTema" class="icone pequeno" type="button" aria-label="Alternar tema claro/escuro" title="Alternar tema">◐</button>
   </header>
 
   <main>
@@ -36,20 +48,71 @@
         <span id="ano" class="pilula neutra"></span>
       </p>
 
+      <blockquote id="destaque" class="destaque">
+        <p id="destaqueTexto"></p>
+        <cite id="destaqueRef"></cite>
+      </blockquote>
+
       <section class="salmo" aria-labelledby="numSalmo">
-        <h2 id="numSalmo" class="num-salmo"></h2>
-        <p id="porque" class="porque"></p>
+        <div class="salmo-cab">
+          <div>
+            <h2 id="numSalmo" class="num-salmo"></h2>
+            <p id="porque" class="porque"></p>
+          </div>
+        </div>
+        <div class="ferramentas" role="toolbar" aria-label="Leitura">
+          <button id="menorLetra" type="button" class="chip" aria-label="Diminuir letra">A−</button>
+          <button id="maiorLetra" type="button" class="chip" aria-label="Aumentar letra">A+</button>
+          <button id="ouvir" type="button" class="chip" aria-pressed="false">🔊 Ouvir</button>
+          <button id="coros" type="button" class="chip" aria-pressed="false" title="Versículos alternados para rezar em grupo">Dois coros</button>
+        </div>
         <div id="versos" class="versos"></div>
         <button id="expandir" type="button" class="link" hidden>Ler salmo completo</button>
       </section>
 
+      <section class="reflexao" aria-labelledby="refTit">
+        <h3 id="refTit">Para rezar hoje</h3>
+        <p id="reflexao"></p>
+        <p id="oracao" class="oracao"></p>
+      </section>
+
       <section id="campanhas" class="campanhas" aria-label="Campanhas e celebrações"></section>
+
+      <section id="horas" class="horas" aria-labelledby="horasTit">
+        <h3 id="horasTit">Liturgia das Horas</h3>
+        <p id="horasSemana" class="porque"></p>
+        <div class="horas-grade">
+          <div><h4>Laudes <small>(manhã)</small></h4><ul id="laudes"></ul></div>
+          <div><h4 id="vespTit">Vésperas <small>(tarde)</small></h4><ul id="vesperas"></ul></div>
+        </div>
+        <p class="nota">Somente os salmos. Os cânticos bíblicos, hinos e antífonas estão no breviário.</p>
+      </section>
 
       <div class="acoes">
         <button id="compartilhar" type="button" class="botao">Compartilhar</button>
-        <span id="aviso" class="aviso" role="status"></span>
+        <button id="imagem" type="button" class="botao secundario">Imagem para WhatsApp/Instagram</button>
       </div>
+      <p id="aviso" class="aviso" role="status"></p>
     </article>
+
+    <section class="painel" aria-labelledby="appTit">
+      <h2 id="appTit">Use todo dia</h2>
+      <div class="painel-grade">
+        <div>
+          <h3>Instale no celular</h3>
+          <p>Fica com ícone na tela inicial e funciona sem internet.</p>
+          <button id="instalar" type="button" class="botao secundario">Instalar o aplicativo</button>
+          <p id="instalarAviso" class="aviso"></p>
+        </div>
+        <div>
+          <h3>Lembrete diário</h3>
+          <p>Cria um lembrete na agenda do seu celular para rezar o salmo todo dia.</p>
+          <label class="campo">Horário <input id="horaLembrete" type="time" value="07:00"></label>
+          <button id="lembrete" type="button" class="botao secundario">Adicionar à agenda</button>
+          <p id="lembreteAviso" class="aviso"></p>
+        </div>
+      </div>
+    </section>
 
     <section class="mes" aria-labelledby="mesTitulo">
       <div class="mes-cab">
@@ -57,7 +120,7 @@
         <h2 id="mesTitulo"></h2>
         <button id="mesProx" class="icone" type="button" aria-label="Próximo mês">›</button>
       </div>
-      <div id="grade" class="grade" role="grid"></div>
+      <div id="grade" class="grade"></div>
       <p class="legenda">
         <span><i class="ponto c-verde"></i>Tempo Comum</span>
         <span><i class="ponto c-roxo"></i>Advento / Quaresma</span>
@@ -65,17 +128,22 @@
         <span><i class="ponto c-vermelho"></i>Mártires / Espírito</span>
         <span><i class="ponto c-rosa"></i>Alegria</span>
       </p>
+      <p><a class="link" href="calendario.html">Ver o ano inteiro e imprimir →</a></p>
     </section>
   </main>
 
   <footer class="rodape">
-    <p>Texto: <span id="traducao"></span>. Os números dos salmos seguem a numeração hebraica.</p>
+    <p>Texto: <span id="traducao"></span>. Numeração hebraica dos salmos, a mesma das Bíblias católicas atuais.</p>
     <p>O salmo de cada dia é uma sugestão para oração pessoal, escolhida pelo tempo litúrgico, solenidades e campanhas.
       Para o salmo responsorial da Missa, consulte o lecionário ou a liturgia diária da sua paróquia.</p>
   </footer>
 
   <script src="js/salmos.js"></script>
+  <script src="js/paroquia.js"></script>
   <script src="js/liturgia.js"></script>
+  <script src="js/conteudo.js"></script>
+  <script src="js/comum.js"></script>
+  <script src="js/cartao.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
